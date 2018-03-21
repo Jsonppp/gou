@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>DIVCSS5-HTML模板</title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+<input type="text">
+<input type="button" value="加密">
+<h4></h4>
+<script>
+    var Inp = document.getElementsByTagName('input'),
+        H4 = document.getElementsByTagName('h4')[0];
+    Inp[1].addEventListener('click',function () {
+    	var psd ='';
+        for(var i=0;i<Inp[0].value.length;i++){
+        	psd += Inp[0].value.charCodeAt(i)
+        }
+        H4.innerHTML = psd
+    });
+</script>
+</body>
+</html>

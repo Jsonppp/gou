@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html onselectstart="return false">
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        #box{
+            overflow: hidden;
+            position: relative;
+            margin:50px auto;
+            width:710px;
+            height: 510px;
+            background: #FCF3B4;
+            padding:15px;
+            /*user-select:none;*/
+        }
+        #content{
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            padding:15px;
+        }
+        #content .pbold{
+            font-weight: bold;
+            line-height:60px;
+            font-size:16px;
+        }
+        #scroll{
+            position: absolute;
+            right: 0;
+            top: 0;
+            height:100%;
+            width:15px;
+            background: #ddd;
+        }
+        #lump{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height:50px;
+            width:100%;
+            background: #000;
+        }
+
+    </style>
+    <script src="mousewheel.js"></script>
+</head>
+<body style="height: 2000px">
+<div id="box" >
+    <div id="content">
+        <h2>阿甘正传</h2><br/>
+        <p class="pbold">1、Life was like a box of chocolates, you never know what you're going to get.</p>
+        <p>生命就像一盒巧克力，结果往往出人意料。</p>
+        <p class="pbold">2、Stupid is as stupid does.</p>
+        <p>蠢人做蠢事，也可理解为傻人有傻福。</p>
+        <p class="pbold">3、Miracles happen every day.</p>
+        <p>奇迹每天都在发生。</p>
+        <p class="pbold">4、it made me look like a duck in water.</p>
+        <p>它让我如鱼得水。</p>
+        <p>我不懂我们是否有着各自的命运，还是只是到处随风飘荡。</p>
+        <p class="pbold">6、Death is just a part of life, something we're all destined to do.</p>
+        <p>死亡是生命的一部分，是我们注定要做的一件事。</p>
+        <p class="pbold">7、You have got to put the past behind you before you can move on.</p>
+        <p>放下包袱，继续前进。</p>
+        <p class="pbold">8、It was like just before the sun goes to bed down on the bayou. There was a million sparkles on the river.</p>
+        <p>就像太阳在落山前映射在河口上，有无数的亮点在闪闪发光。</p>
+        <p class="pbold">9、If there is anything you need, I will not be far away.</p>
+        <p>只要你需要，我就在这里。</p>
+        <p class="pbold">10、I am a man of my word.</p>
+        <p>我是信守承诺的人。</p>
+        <p class="pbold">11、There is one small step for a man,a giant leap for mankind.</p>
+        <p>某人的一小步就是人类的一大步。</p>
+        <h2>阿甘正传</h2><br/>
+        <p class="pbold">1、Life was like a box of chocolates, you never know what you're going to get.</p>
+        <p>生命就像一盒巧克力，结果往往出人意料。</p>
+        <p class="pbold">2、Stupid is as stupid does.</p>
+        <p>蠢人做蠢事，也可理解为傻人有傻福。</p>
+        <p class="pbold">3、Miracles happen every day.</p>
+        <p>奇迹每天都在发生。</p>
+        <p class="pbold">4、it made me look like a duck in water.</p>
+        <p>它让我如鱼得水。</p>
+        <p>我不懂我们是否有着各自的命运，还是只是到处随风飘荡。</p>
+        <p class="pbold">6、Death is just a part of life, something we're all destined to do.</p>
+        <p>死亡是生命的一部分，是我们注定要做的一件事。</p>
+        <p class="pbold">7、You have got to put the past behind you before you can move on.</p>
+        <p>放下包袱，继续前进。</p>
+        <p class="pbold">8、It was like just before the sun goes to bed down on the bayou. There was a million sparkles on the river.</p>
+        <p>就像太阳在落山前映射在河口上，有无数的亮点在闪闪发光。</p>
+        <p class="pbold">9、If there is anything you need, I will not be far away.</p>
+        <p>只要你需要，我就在这里。</p>
+        <p class="pbold">10、I am a man of my word.</p>
+        <p>我是信守承诺的人。</p>
+        <p class="pbold">11、There is one small step for a man,a giant leap for mankind.</p>
+        <p>某人的一小步就是人类的一大步。</p>
+    </div>
+    <div id="scroll">
+        <div id="lump"></div>
+    </div>
+</div>
+<script>
+    var Box = document.getElementById('box'),
+        Content = document.getElementById('content'),
+        Scroll = document.getElementById('scroll'),
+        Lump = document.getElementById('lump');
+        LumpHeight = Box.clientHeight/Content.offsetHeight * Scroll.offsetHeight, //每次都会按照内容的百分比来获取一次滚动条的长度
+        Lump.style.height = LumpHeight + 'px'; //每次按照内容的百分比从新给滚动条的长度赋值
+    var maxLump = Scroll.clientHeight - Lump.offsetHeight, //设置最大滚动高度
+        maxContent = Box.clientHeight - Content.offsetHeight; //设置页面最大可滚动高度
+    mousewheel(Box,function (b,e) { //调用滚轮事件写好的框架
+        var Top = Lump.offsetTop; //每次触发获取滚动条到他定位父级的距离
+        if(b>0){ //往上
+        	Top -= 30;
+        }else { //往下
+        	Top += 30;
+        }
+        Fn(Top); //调用下面公共函数
+        return false
+    });
+    //滚动条拖动事件
+    Lump.onmousedown = function (e) {
+    	e = e || window.event;
+    	var downY = e.clientY, //点击时候获取当前Y左边
+            downTop = this.offsetTop; //获取对象到定位父级距离
+        document.onmousemove = function (e) {
+            e = e || window.event;
+            var Top = e.clientY - downY + downTop; //拖动后的Y坐标减初始坐标，拿到所移动的值+初始定位父级的高度
+            Fn(Top); //调用下面公共函数
+        };
+	    document.onmouseup = function () {
+            this.onmousemove = null;
+            this.onmouseup = null;
+	    }
+    };
+    //滚动条点击事件
+    Scroll.onclick = function (e) {
+    	e = e || window.event;
+    	//兼容page的方式，如果不需要兼容就直接page-LumpHeight/2-getPage(Scroll).top
+    	var Top = e.clientY - LumpHeight/2 - getPage(Scroll).top + (document.documentElement.scrollTop || document.body.scrollTop)
+    	Fn(Top);
+        console.log(Top)
+    };
+    function Fn(Top) {
+	    Top = Math.max(Top,0); //设置滚动最大最小距离
+	    Top = Math.min(Top,maxLump);
+	    Lump.style.top = Top + 'px'; //滚动高度赋值
+	    Content.style.top = Top/maxLump * maxContent + 'px' //拿到滚动条比例乘内容可滚动的最大值
+    }
+    function getPage(obj) {
+        var json = {
+        	left : 0,
+            top : 0
+        };
+        //判断参数是否是body
+        while (obj !== document.body){
+        	json.left += obj.offsetLeft;
+        	json.top += obj.offsetTop;
+            obj = obj.offsetParent;
+        }
+        return json
+    }
+</script>
+</body>
+</html>

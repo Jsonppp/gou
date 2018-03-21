@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+<div>伦敦时间：<span class="time"></span></div>
+<div>北京时间：<span class="time"></span></div>
+<div>东京时间：<span class="time"></span></div>
+<div>罗马时间：<span class="time"></span></div>
+<script>
+    var Box = document.getElementsByClassName('time');
+
+    setInterval(timer,1000);
+    function timer() {
+	    var date = new Date(),
+		    UTCtime = date.getTime() + date.getTimezoneOffset()*60*1000, // 获取格林威治标准时间（本地时间-8时差）
+            arr = [     //把每个地方的时间都存入一个数组里面，方便下面for循环调运
+            	getTime(UTCtime), //这里执行下面getTime的函数并把其函数的格式化时间用json的形式返回到数组里来，，，，这的UTCtime是上面定义好的国际标准时间，加上对应国家的时差，将其作为实参传送到下面的函数供每次new Date时间设置
+                getTime(UTCtime+8*60*60*1000),
+                getTime(UTCtime+9*60*60*1000),
+                getTime(UTCtime+60*60*1000)
+            ];
+	    for(var i=0;i<Box.length;i++){ //循环，把数组里存好的每项地方的时间对应添加到标签里
+		    Box[i].innerHTML = arr[i].YY+'年'+arr[i].MM+'月'+arr[i].DD+'日'+arr[i].hh+'时'+arr[i].mm+'分'+arr[i].ss+'秒'
+	    }
+    }
+    function getTime(time) {
+        var date = new Date(time),
+            YY = date.getFullYear(),
+            MM = Format(date.getMonth()+1),
+            DD = Format(date.getDate()),
+            hh = Format(date.getHours()),
+            mm = Format(date.getMinutes()),
+            ss = Format(date.getSeconds());
+        return {
+        	YY : YY,
+            MM : MM,
+            DD : DD,
+            hh : hh,
+            mm : mm,
+            ss : ss
+        }
+    }
+    function Format(n) {
+        return n<10?'0'+n:''+n;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+<p id="lastTime"></p>
+<p id="newTime"></p>
+<script>
+    fn()
+    var date = new Date(),
+        YY = date.getFullYear(),
+        MM = Format(date.getMonth()+1),
+        DD = Format(date.getDate()),
+        hh = Format(date.getHours()),
+        mm = Format(date.getMinutes()),
+        ss = Format(date.getSeconds()),
+        timer = YY+'年'+MM+'月'+DD+'日'+' '+hh+':'+mm+':'+ss;
+    setCookie({
+        last : timer
+    },5);
+    function fn() {
+	    var last1 = getCookie('last')
+	    if(last1){
+		    document.getElementById('lastTime').innerHTML = '您上次访问本站时间是:'+last1
+	    }else {
+		    document.getElementById('lastTime').innerHTML = '您是首次访问本站'
+	    }
+    }
+    document.getElementById('newTime').innerHTML = '您本次访问本站时间是:'+timer
+	function setCookie(json,time) {
+		var time1 = new Date(Date.now()+ time*365*24*60*60*1000).toUTCString();
+		for (var key in json){
+			document.cookie = key+"="+ json[key] + ";expires=" + time1;
+		}
+	}
+
+	function getCookie(attr) {// lastTime   /\b/
+		var arr = document.cookie.match(new RegExp("\\b"+attr+"=([^;]+)(;|$)"));
+		return arr?arr[1]:"";
+	}
+	function Format(n) {
+		return n<10?'0'+n:''+n
+	}
+</script>
+</body>
+</html>

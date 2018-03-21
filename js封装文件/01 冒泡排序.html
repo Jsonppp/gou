@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="FengYu">
+    <title>Tz-36期Js</title>
+    <style>
+        *{margin:0;padding:0;font-family: Microsoft YaHei,serif;}
+	    li{list-style: none;}
+
+    </style>
+</head>
+<body>
+<script>
+    var arr =  [36,12,88,56,27,999,1000,456,654,123,789,741];
+
+    //a = [b,b=a][0];
+    /*for(var i=0;i<arr.length-1;i++){//确定趟数
+        for(var j=arr.length-1;j > i;j--){
+            if(arr[j]<arr[j-1]){//后一个值跟前一个值比较，如果后一个值比前一个小，就交换位置
+                arr[j] = [arr[j-1],arr[j-1]=arr[j]][0]
+            }
+        }
+    }*/
+
+
+    for(var i=0;i<arr.length-1;i++)for(var j=arr.length-1;j > i;j--)(arr[j]<arr[j-1])&&(arr[j] = [arr[j-1],arr[j-1]=arr[j]][0])
+
+
+
+
+
+    console.log(arr)
+
+
+</script>
+</body>
+</html>

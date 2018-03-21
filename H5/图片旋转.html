@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="keywords" content="YF"/>
+    <meta name="description" content="YF"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            perspective: 800px;
+            overflow: hidden;
+        }
+        #box{
+            position: relative;
+            width: 133px;
+            height: 200px;
+            margin: auto;
+            border: 1px solid red;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg) rotateY(0deg);
+        }
+        img{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #box p{
+            position: absolute;
+            /*left:0;
+            top:0;
+            right: 0;
+            bottom: 0;
+            margin: auto;*/
+            top: calc(50% - 400px);
+            left: calc(50% - 400px);
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            transform:translateY(100px) rotateX(90deg);
+            background: -webkit-radial-gradient(
+                    center center,
+                    600px 600px,
+                    rgba(50,50,50,1),
+                    rgba(0,0,0,0)
+            );
+
+        /*#box img:nth-child(1){transform: rotateY(0deg) translateZ(300px) ;}*/
+        /*#box img:nth-child(2){transform: rotateY(36deg) translateZ(300px) ;}*/
+        /*#box img:nth-child(3){transform: rotateY(72deg) translateZ(300px) ;)}*/
+        /*#box img:nth-child(4){transform: rotateY(108deg) translateZ(300px) ;}*/
+    </style>
+</head>
+<body>
+    <div id="box">
+        <img src="img/2.1.jpg" alt="">
+        <img src="img/2.2.jpg" alt="">
+        <img src="img/2.3.jpg" alt="">
+        <img src="img/2.4.jpg" alt="">
+        <img src="img/2.5.jpg" alt="">
+        <img src="img/2.6.jpg" alt="">
+        <img src="img/2.7.jpg" alt="">
+        <img src="img/2.8.jpg" alt="">
+        <img src="img/2.9.jpg" alt="">
+        <img src="img/2.10.jpg" alt="">
+        <p></p>
+    </div>
+    <script>
+        window.onload =function () {
+            var aImg = document.querySelectorAll('img');
+            for(var i=0;i<aImg.length;i++){
+                aImg[i].style.transform = 'rotateY('+i*36+'deg) translateZ(300px)';
+                aImg[i].style.transition = 'transform 1s '+(aImg.length-i)*0.1+'s';
+
+            }
+            var Box = document.getElementById('box'),
+                lastX,
+                lastY,
+                nowX,
+                nowY,
+                desX=0,
+                desY=0,
+                rotX=-30,
+                rotY=0,
+                timer;
+            document.onmousedown = function (ev) {
+                clearInterval(timer)
+                var e = ev || event;
+                lastX = e.clientX;
+                lastY = e.clientY;
+                this.onmousemove = function (ev) {
+                    var e = ev || event;
+                    nowX = e.clientX;
+                    nowY = e.clientY;
+                    // 当前点的坐标和前一点的坐标的差值
+                    // 差值就是 旋转的度数
+                    desX = nowX - lastX;
+                    desY = nowY - lastY;
+                    // 沿着X轴旋转 那么改变是rotateY() 反之 改变rotateX()
+                    // 度数太大，只取移动距离的10%
+                    // 度数累加
+                    rotX -= desY*0.1;
+                    rotY += desX*0.2;
+                    // 更新前 一点的坐标
+                    lastY = nowY;
+                    lastX = nowX;
+                    Box.style.transform = 'rotateX('+rotX+'deg) rotateY('+rotY+'deg)';
+                };
+                this.onmouseup = function () {
+                    this.onmousemove = this.onmouseup = null;
+                    timer = setInterval(function () {
+                        // 度数越来越小 一个数怎么样越来越小？
+                        // 越乘越小,最终无限接近于0
+                        desX *= 0.95;
+                        desY *= 0.95;
+                        rotX -= desY * 0.1;
+                        rotY += desX *0.2;
+                        Box.style.transform = 'rotateX('+rotX+'deg) rotateY('+rotY+'deg)';
+                        if( Math.abs(desX) < 0.5 && Math.abs(desY) < 0.5){
+                            clearInterval(timer)
+                        }
+                    },13)
+                };
+                return false
+            }
+        }
+
+    </script>
+</body>
+</html>

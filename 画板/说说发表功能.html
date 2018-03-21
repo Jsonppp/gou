@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        #box{
+            width: 500px;
+            margin: 50px auto 0;
+        }
+        .top{
+            overflow: hidden;
+            width: 470px;
+            background: #ddd;
+            padding: 10px 15px 5px;
+            border-radius: 5px;
+        }
+        .top textarea{
+            width: 100%;
+            height: 80px;
+            background: #ffffff;
+            border-radius: 5px;
+            resize: none;
+        }
+        .t-left{
+            float: left;
+            overflow: hidden;
+            width: 32px;
+            height: 32px;
+        }
+        .t-left img{
+            display: none;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .t-left img.on{
+            display: block;
+        }
+        .t-right{
+            float: right;
+            overflow: hidden;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+            background: #f06000;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .bottom{
+            width: 100%;
+            padding-top: 40px;
+        }
+        .bottom li{
+            width: 100%;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+        }
+        .bottom li img{
+            width: 32px;
+            height: 32px;
+            margin-right: 20px;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="top">
+            <textarea></textarea>
+            <p class="t-left">
+                <img class="on" src="img/1.jpg" alt="">
+                <img src="img/2.jpg" alt="">
+            </p>
+            <p class="t-right">发表</p>
+        </div>
+        <div class="bottom">
+            <ul>
+                <!--<li>-->
+                    <!--<img src="img/1.jpg">123123132-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </div>
+    <script>
+        var Text = document.getElementsByTagName('textarea')[0],
+            Img = document.querySelectorAll('.t-left img'),
+            But = document.getElementsByClassName('t-right')[0],
+            Ul = document.querySelector('.bottom ul'),
+            src;
+        Img[0].addEventListener('click',function () {
+            this.className = '';
+            Img[1].className = 'on';
+            src = 'img/2.jpg'
+        })
+        Img[1].addEventListener('click',function () {
+            this.className = '';
+            Img[0].className = 'on';
+            src = 'img/1.jpg'
+        })
+        But.addEventListener('click',function () {
+            Ul.innerHTML += '<li><img src='+src+' >'+Text.value+'</li>'
+        })
+    </script>
+</body>
+</html>

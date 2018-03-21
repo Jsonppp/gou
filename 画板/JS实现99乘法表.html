@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        div{
+            margin-top: 3px;
+            border-bottom: 1px solid #666;
+        }
+        div span{
+            display: inline-block;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #aaa;
+            border:1px solid #aaa;
+            margin: 3px ;
+        }
+    </style>
+</head>
+<body>
+    <div id="on"></div>
+    <div id="two"></div>
+    <div id="three"></div>
+    <div id="four"></div>
+    <script>
+        !function () {
+	        for( var i=1;i<10;i++ ){
+		        for( var j=1;j<=i;j++){
+			        document.getElementById('on').innerHTML += '<span>'+i+'*'+j+'='+i*j+'</span>'
+		        }
+		        document.getElementById('on').innerHTML += '<br>';
+	        }
+        }();
+        !function () {
+	        for( var i=1;i<10;i++ ){
+		        for( var j=i;j<10;j++){
+			        document.getElementById('two').innerHTML += '<span>'+i+'*'+j+'='+i*j+'</span>'
+		        }
+		        document.getElementById('two').innerHTML += '<br>';
+	        }
+        }();
+        !function () {
+	        for( var i=9;i>0;i-- ){
+		        for( var j=i;j>0;j--){
+			        document.getElementById('three').innerHTML += '<span>'+i+'*'+j+'='+i*j+'</span>'
+		        }
+		        document.getElementById('three').innerHTML += '<br>';
+	        }
+        }();
+        !function () {
+	        for( var i=9;i>0;i-- ){
+		        for( var j=i;j<10;j++){
+			        document.getElementById('four').innerHTML += '<span>'+i+'*'+j+'='+i*j+'</span>'
+		        }
+		        document.getElementById('four').innerHTML += '<br>';
+	        }
+        }();
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        div{
+            position: absolute;
+            top:0;
+            left:0;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<script>
+    player(20)
+    function player(n) {
+	    for(var i=0;i<n;i++){
+			var Div = document.createElement('div');
+			Div.style.background = randomColor();
+			Div.style.width = 100 - i + 'px';
+			Div.style.height = 100 - i + 'px';
+			Div.yfTop = i+1;
+			Div.yfLeft = i+1;
+			document.body.appendChild(Div)
+	    }
+    }
+
+    play()
+    function play() {
+	    var div = document.getElementsByTagName('div');
+	    for(var i=0;i<div.length;i++){
+		    var Top = div[i].offsetTop,
+			    Left = div[i].offsetLeft,
+			    maxTop = document.documentElement.clientHeight - parseFloat(getComputedStyle(div[i]).height),
+			    maxleft = document.documentElement.clientWidth - parseFloat(getComputedStyle(div[i]).width),
+                ball = div[i];
+		    Top += ball.yfTop;
+		    Left += ball.yfLeft;
+		    if( Top >= maxTop || Top <= 0 ){
+		    	Top = Math.max(Top,0);
+                Top = Math.min(Top,maxTop);
+			    ball.yfTop = -ball.yfTop;
+			    ball.style.backgroundColor = randomColor()
+            }
+            if( Left >= maxleft || Left <= 0 ){
+                Left = Math.max(Left,0)
+                Left = Math.min(Left,maxleft)
+                ball.yfLeft = -ball.yfLeft;
+	            ball.style.backgroundColor = randomColor()
+
+            }
+		    div[i].style.top = Top + 'px';
+		    div[i].style.left = Left + 'px';
+	    }
+	    requestAnimationFrame(play)
+    }
+    function randomColor() {
+        var r = Math.floor(Math.random()*256),
+            g = Math.floor(Math.random()*256),
+            b = Math.floor(Math.random()*256);
+        return 'rgb('+r+','+g+','+b+')'
+    }
+
+
+
+//    Fn();
+//    function Fn() {
+//    	var Top = Box.offsetTop,//获取每次小球高度的初始值
+//            Left = Box.offsetLeft; //获取每次小球宽度的初始值
+//        Top += topvalue;//小球每次移动之后高度所在的位置
+//        Left += leftvalue; //小球每次移动之后宽度所在的位置
+//        if(Top >= maxTop){
+//	        topvalue = -topvalue;
+//	        Top = maxTop;
+//        }
+//        if(Top <= 0){
+//	        topvalue = -topvalue;
+//            Top = 0
+//        }
+//	    if(Left >= maxLeft){
+//		    leftvalue = -leftvalue;
+//            Left = maxLeft
+//	    }
+//	    if(Left <= 0){
+//		    leftvalue = -leftvalue;
+//            Left = 0
+//	    }
+//	    Box.style.top = Top + 'px';
+//	    Box.style.left = Left + 'px';
+//        requestAnimationFrame(Fn)
+//    }
+</script>
+</body>
+</html>

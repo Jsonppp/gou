@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        #box{
+            width: 500px;
+            margin: 100px auto 0;
+        }
+        .top{
+            width: 100%;
+            height: 30px;
+        }
+        .top span{
+            display: inline-block;
+            width: 80px;
+            height: 30px;
+            font-size: 14px;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            background: #666;
+        }
+        .top span.bg{
+            background: #FD6703;
+        }
+        .bottom{
+            position: relative;
+            width: 100%;
+            height: 350px;
+        }
+        .imgBox{
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .imgBox img{
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .imgBox img.block{
+            display: block;
+        }
+        .bottom p{
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            font-size: 14px;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            background: rgba(0,0,0,.5);
+        }
+        .bottom p.b-top{
+            top: 0;
+        }
+        .bottom p.b-bottom{
+            bottom: 0;
+        }
+        .bottom > span{
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 60px;
+            height: 28px;
+            font-size: 14px;
+            line-height: 28px;
+            text-align: center;
+            color: #ffffff;
+            background: rgba(0,0,0,.5);
+            cursor: pointer;
+        }
+        .bottom span.next{
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div class="top">
+        <span id="cycle" class="bg">循环切换</span>
+        <span id="single" >单边切换</span>
+    </div>
+    <div class="bottom">
+        <div class="imgBox">
+            <img class="block" src="img/car1.jpg" alt="">
+            <img src="img/car2.jpg" alt="">
+            <img src="img/car3.jpg" alt="">
+            <img src="img/car4.jpg" alt="">
+            <img src="img/car5.jpg" alt="">
+            <img src="img/car6.jpg" alt="">
+        </div>
+        <p class="b-top" ><span id="T-Number">1</span>/6</p>
+        <p class="b-bottom">第<span id="B-Number">一</span>张图片</p>
+        <span class="prev">上一张</span>
+        <span class="next">下一张</span>
+    </div>
+</div>
+<script>
+	var Cycle = document.getElementById('cycle'),
+		Single = document.getElementById('single'),
+		Img = document.getElementsByTagName('img'),
+		TNumber = document.getElementById('T-Number'),
+		BNumber = document.getElementById('B-Number'),
+		Prev = document.getElementsByClassName('prev')[0],
+		Next = document.getElementsByClassName('next')[0],
+		arr = ['一','二','三','四','五','六'],
+		index = 0;
+	Cycle.addEventListener('click',Cy);
+	Single.addEventListener('click',Si);
+	Cy();
+	function Si() {
+		Next.removeEventListener('click',next);
+		Prev.removeEventListener('click',prev);
+		this.className = 'bg';
+		Cycle.className = '';
+		nextS();
+		prevS();
+		Next.addEventListener('click',nextS);
+		Prev.addEventListener('click',prevS);
+	}
+	function Cy() {
+		Next.removeEventListener('click',nextS);
+		Prev.removeEventListener('click',prevS);
+		this.className = 'bg';
+		Single.className = '';
+		next();
+		prev();
+		Next.addEventListener('click',next);
+		Prev.addEventListener('click',prev);
+	}
+	function next() {
+			if(index===5){
+				Img[index].className = '';
+				index=0;
+				Img[index].className= 'block';
+				BNumber.innerHTML = arr[index];
+				TNumber.innerHTML = index+1
+			}else {
+				next1();
+			}
+	};
+	function prev() {
+			if(index===0){
+				index=5;
+				TNumber.innerHTML = index+1;
+				Img[0].className = '';
+				BNumber.innerHTML = arr[index];
+				Img[index].className = 'block';
+			}else {
+				prev1();
+			}
+
+	};
+	function nextS() {
+			if(!(index===5)){
+				next1();
+			}else {
+				alert('这是最后一张了')
+			}
+	};
+	function prevS() {
+			if(!(index===0)){
+				prev1();
+			}else {
+				alert('这是第一张了')
+			}
+	};
+	function next1() {
+		Img[index].className = '';
+		index++;
+		Img[index].className = 'block';
+		BNumber.innerHTML = arr[index]
+		TNumber.innerHTML = index+1
+	};
+	function prev1() {
+		TNumber.innerHTML = index;
+		Img[index].className = '';
+		index--;
+		BNumber.innerHTML = arr[index]
+		Img[index].className = 'block';
+	}
+</script>
+</body>
+</html>

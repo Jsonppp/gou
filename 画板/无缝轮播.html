@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        #box{
+            overflow: hidden;
+            position: relative;
+            width: 600px;
+            height: 400px;
+            margin:50px auto;
+        }
+        .pic{
+
+            width: 100%;
+            height: 100%;
+        }
+        .pic ul{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1000%;
+            height: 100%;
+        }
+        .pic li{
+            float: left;
+            width: 600px;
+            height: 100%;
+            font-size: 100px;
+            text-align: center;
+            line-height:400px;
+            color:#fff;
+        }
+        .pic li:nth-child(1){
+            background: pink;
+        }
+        .pic li:nth-child(2){
+            background: skyblue;
+        }
+        .pic li:nth-child(3){
+            background: yellow;
+        }
+        .pic li:nth-child(4){
+            background: greenyellow;
+        }
+        .pic li:nth-child(5){
+            background: #f5c773;
+        }
+        .pic li:nth-child(6){
+            background: #8b4aff;
+        }
+        .pic li:nth-child(7){
+            background: pink;
+        }
+        .tab{
+            position: absolute;
+            left: 0;
+            bottom: 20px;
+            width: 100%;
+            height: 20px;
+
+        }
+        .tab ul{
+            width: 144px;
+            height:100%;
+            margin:0 auto;
+        }
+        .tab li{
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin:0 2px;
+            background: #9c9c9c;
+            text-align: center;
+            line-height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #fff;
+        }
+        .tab li.on{
+            background: #f60;
+        }
+        .btn{
+            position: absolute;
+            top: 50%;
+            width: 25px;
+            height: 50px;
+            margin-top:-25px;
+            background: rgba(0,0,0,.5);
+            color:#fff;
+            font-size: 25px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        .right{
+            right:0;
+        }
+    </style>
+    <script src="move.js"></script>
+</head>
+<body>
+<div id="box">
+    <div class="pic">
+        <ul>
+            <li>一</li>
+            <li>二</li>
+            <li>三</li>
+            <li>四</li>
+            <li>五</li>
+            <li>六</li>
+            <li>一</li>
+        </ul>
+    </div>
+    <div class="tab">
+        <ul>
+            <li class="on">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </div>
+    <div class="btn left">&lt;</div>
+    <div class="btn right">&gt;</div>
+</div>
+<script>
+    var Box = document.getElementById('box'),
+        Pic = document.querySelector('.pic ul'),
+        Tab = document.querySelectorAll('.tab ul li'),
+        Left = document.getElementsByClassName('left')[0],
+        Right = document.getElementsByClassName('right')[0],
+        LiWidth = document.querySelectorAll('.pic ul li')[0].offsetWidth,
+        index = 0,
+        length = Tab.length,
+        timer,date = 0;
+        for(var i=0;i<length;i++){
+        	Tab[i].i = i;
+        	Tab[i].onclick = function () {
+        		if((new Date-date) >= 700){
+			        date = new Date;
+			        Tab[index].className = '';
+			        index = this.i
+			        Tab[index].className = 'on'
+			        move(Pic,{left: - LiWidth*index},300)
+                }
+	        }
+        }
+        //自动轮播定时器
+        timer = setInterval(auto,2000);
+        //移入清除定时器
+        Box.onmouseenter = function () {
+            clearInterval(timer)
+        };
+        //移出启动定时器
+        Box.onmouseleave = function () {
+	        setInterval(auto,2000)
+        };
+        //下一张点击事件
+        Right.onclick = function () {
+	        auto();
+        };
+        //上一张点击事件
+        Left.onclick = function () {
+        	if((new Date-date) >= 1000){
+        		date = new Date;
+		        Tab[index%length].className = '';
+		        index--;
+		        Tab[index].className = 'on';
+		        move(Pic,{left : -LiWidth*index},200,function () {
+			        if(index===0){
+				        this.style.left = -(LiWidth*Tab.length) + 'px'
+				        index = Tab.length
+			        }
+		        })
+            }
+        };
+        //下一张公共函数
+        function auto() {
+        	if((new Date-date) >= 1000){
+		        date = new Date;
+		        Tab[index].className = '';
+		        index++;
+		        Tab[index%length].className = 'on';
+		        move(Pic,{left : -LiWidth*index},200,function () {
+			        if(index===6){
+				        this.style.left = 0
+				        index = 0
+			        }
+		        })
+	        }
+        }
+</script>
+</body>
+</html>

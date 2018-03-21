@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        #box{
+            width: 500px;
+            height: 300px;
+            margin:50px auto;
+            padding:10px;
+            border:1px solid #ddd;
+        }
+        #box span{
+            font-size:18px;
+            font-weight: bold;
+            color:red;
+        }
+        #box p{
+            text-indent: 50px;
+            margin-top:20px;
+            line-height:30px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <input type="text" placeholder="匹配项">
+    <input type="text"  placeholder="替换项">
+    <button >查找</button>
+    <button>替换</button>
+    <p>[行程特色] 长沙国家森林公园与一脉相连的索溪峪、天子山两大自然保护区组成武陵源， 是长沙的核心景区。长沙，奇峰三千，秀水八百，长沙的山大多是拔地而起山， 山上峰峻石奇，或玲珑秀丽，或峥嵘可怖，或平展...</p>
+</div>
+<script>
+    var Inp = document.getElementsByTagName('input'),
+        But = document.getElementsByTagName('button'),
+        Op = document.getElementsByTagName('p')[0],
+        pHTML = Op.innerHTML;
+    But[0].addEventListener('click',function () {
+	    var val = Inp[0].value;
+	    if (val) {
+		    var arr = pHTML.split(val);
+		    Op.innerHTML = arr.join("<span>" + val + "</span>")
+	    }
+    });
+    But[1].addEventListener('click',function () {
+        var val1 = Inp[0].value,
+            val2 = Inp[1].value;
+        if(val1){
+	        var arr = pHTML.split(val1);
+	        console.log(arr)
+	        Op.innerHTML = arr.join("<span>" + val2 + "</span>");
+	        pHTML = arr.join(val2)
+        }
+    })
+</script>
+</body>
+</html>

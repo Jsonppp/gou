@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        p{
+            text-align: center;
+            padding:20px;
+        }
+        #paint{
+            width: 99%;
+            height: 500px;
+            margin:0 auto;
+            border:1px solid black;
+        }
+        #paint div{
+            position: absolute;
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+<body>
+<p>
+    <span>粗细</span>
+    <select id="sct1">
+        <option value="8">8</option>
+        <option value="10">10</option>
+        <option value="12">12</option>
+        <option value="14">14</option>
+    </select>
+    <span>颜色</span>
+    <select id="sct2">
+        <option value="green">绿色</option>
+        <option value="pink">粉色</option>
+        <option value="skyblue">天蓝色</option>
+        <option value="red">红色</option>
+    </select>
+    <button id="null">清空</button>
+    <button id="revoke">撤回</button>
+    <button id="unrevoke">反撤回</button>
+</p>
+<div id="paint"></div>
+<script>
+    var sct1 = document.getElementById('sct1'),
+        sct2 = document.getElementById('sct2'),
+        Null = document.getElementById('null'),
+        Revoke = document.getElementById('revoke'),
+        unRevoke = document.getElementById('unrevoke'),
+        Paint = document.getElementById('paint'),
+        arrRevoke = [],
+        arrunRevoke = [];
+    Paint.onmousedown = function () {
+    	arrRevoke[arrRevoke.length] = [];
+        this.onmousemove = function (e) {
+	        e = e || window.event;
+            var Div = document.createElement('div');
+            Div.style.width = sct1.value + 'px';
+            Div.style.height = sct1.value + 'px';
+            Div.style.background = sct2.value;
+            Div.style.top = e.clientY + 'px';
+            Div.style.left = e.clientX + 'px';
+            Paint.appendChild(Div)
+            arrRevoke[arrRevoke.length-1].push(Div)
+
+        };
+
+    };
+    document.onmouseup = function () {
+	    Paint.onmousemove = null;
+    };
+    //清空
+    Null.onclick = function () {
+        Paint.innerHTML = '';
+        arrRevoke = [];
+        arrunRevoke = [];
+    }
+    //撤回
+    Revoke.onclick = function () {
+    	if(arrRevoke.length){
+		    for(var i=0;i<arrRevoke[arrRevoke.length-1].length;i++){
+			    Paint.removeChild(arrRevoke[arrRevoke.length-1][i])
+		    }
+		    arrunRevoke.push(arrRevoke.pop())
+        }else {
+    		alert('没有可撤回的内容')
+        }
+
+    }
+    //反撤回
+    unRevoke.onclick = function () {
+    	if(arrunRevoke.length){
+		    for(var i=0;i<arrunRevoke[arrunRevoke.length-1].length;i++){
+			    Paint.appendChild(arrunRevoke[arrunRevoke.length-1][i])
+		    }
+		    arrRevoke.push(arrunRevoke.pop())
+        }else {
+    		alert('没有可反撤回的内容')
+        }
+
+    }
+
+//    我认为,加班,是工作的一部分.没有任何一个公司能保证在这一天内完成所有的工作任务,所以,对于一些
+//    "急""要"的工作任务就需要我们这些员工在下班后进一步的处理了.我个人认为,既然投身于我的公司,
+//        就要像我的家一样,没有什么这多这少的比较,我深知,只有公司有了好的发展,我才能更进一点的实现自己
+//    的理想,所以,我觉得,加班,不是问题
+//        .我不会畏惧加班,更不会去指责公司的安排,因为我知道,这个公司将会是我付出和收获理想的地方!
+//
+//
+//        老师好，我叫戴羽锋，今年23岁，是宁波北仑人，公司是私募股权投资基金公司。我主要负责公司内部
+//    CRM项目系统的前端页面开发及项目日常运营期间的维护，并与UI及后台工程师紧密配合，利用js DOM
+//    BOM的API，jQ,ajax等大量方法完成高质量的代码编写，优化网站性能，并兼容各主流浏览器。
+//我对互联网行业有着浓厚的兴趣和热情，也充分利用了闲暇时间参与了Web前端针对性的培训。
+//并且至今为止还在学习。后期还报名了SEO网站搜索隐形的优化，跟大数据的开发与运用。
+//我的性格是比较重感情。爱与人交流。自学能力比较强，喜欢钻研不断突破自己。
+//
+//掌握的技术：
+//能熟练的运用DIV CSS javascript原生 DOM BOMAPI Vue jQuery ajax jsonp跨域等前端开发技术
+//
+//    1 很荣幸能有机会向各位进行自我介绍。我叫戴羽锋 今年23岁，我学的是计算机科学与技术专业。
+//闲暇时喜欢逛掘金CSDN博客,因为那里能让我学到很多东西，可以不断提升充实自己。我的性格开朗
+//    抗压能力强，喜欢钻研不断突破自己。对互联网行业有着浓厚的兴趣，如果能给我个机会，
+//我一定会在工作中好好地表现的，一定不会让你们失望。谢谢!
+</script>
+</body>
+</html>

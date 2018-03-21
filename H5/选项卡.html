@@ -1,0 +1,127 @@
+img/1.png<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="keywords" content="YF"/>
+    <meta name="description" content="YF"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        img{
+            vertical-align: top;
+        }
+        #head{
+            height: 150px;
+            background-color: red;
+            text-align: center;
+        }
+        .con{
+            width: 1178px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+        .smallTitle{
+            margin: 25px auto;
+        }
+        .content{
+            text-align: center;
+        }
+        .content input{
+            display: none;
+        }
+        .content label{
+            display: inline-block;
+            width: 120px;
+            height: 45px;
+            font-size: 18px;
+            color: #fff;
+            text-align: center;
+            line-height: 45px;
+            background: #ff0000;
+            margin-left: 20px;
+            border-radius: 10px;
+        }
+        .content div{
+            height: 362px;
+            display: none;
+        }
+        .content div{
+            padding-top: 25px;
+        }
+        .content label{
+            cursor: pointer;
+        }
+        .content input:checked + label{
+            height: 50px;
+            background: #ff0000;
+            vertical-align: bottom;
+        }
+        .content input:nth-of-type(1):checked ~ div:nth-of-type(1){
+             display: block;
+        }
+        .content input:nth-of-type(2):checked ~ div:nth-of-type(2){
+            display: block;
+        }
+        .content input:nth-of-type(3):checked ~ div:nth-of-type(3){
+            display: block;
+        }
+        .content input:nth-of-type(4):checked ~ div:nth-of-type(4){
+            display: block;
+        }
+        .content input:nth-of-type(5):checked ~ div:nth-of-type(5){
+            display: block;
+        }
+        .content input:nth-of-type(6):checked ~ div:nth-of-type(6){
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header id="head">
+        <img src="img/rayli_logo.png" alt="">
+    </header>
+    <main class="con">
+        <div class="bigTitle">
+            <img src="img/bigTitle.jpg" alt="">
+        </div>
+        <div class="smallTitle">
+            <img src="img/smallTitle.png" alt="">
+        </div>
+        <div class="content">
+            <input type="radio" name="one" id="radio1" checked>
+            <label for="radio1">明星来了</label>
+            <input type="radio" name="one" id="radio2">
+            <label for="radio2">"咖"嚓一刻</label>
+            <input type="radio" name="one" id="radio3">
+            <label for="radio3">美肌管理课</label>
+            <input type="radio" name="one" id="radio4">
+            <label for="radio4">彩妆偶像</label>
+            <input type="radio" name="one" id="radio5">
+            <label for="radio5">百人评测团</label>
+            <input type="radio" name="one" id="radio6">
+            <label for="radio6">特别企划</label>
+
+            <div><img src="img/1.png" alt=""></div>
+            <div><img src="img/2.png" alt=""></div>
+            <div><img src="img/3.png" alt=""></div>
+            <div><img src="img/4.png" alt=""></div>
+            <div><img src="img/5.png" alt=""></div>
+            <div><img src="img/6.png" alt=""></div>
+
+        </div>
+    </main>
+</body>
+</html>

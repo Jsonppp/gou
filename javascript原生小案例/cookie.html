@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>22</title>
+    <meta name="keywords" content="关键词"/>
+    <meta name="description" content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+<p id="lastTime"></p>
+<p id="newTime"></p>
+<script>
+    var LastTime = document.getElementById('lastTime'),
+        NewTime = document.getElementById('newTime');
+    var last = document.cookie.match(/\blasttime=([^;]+)(;|$)/);
+    if(last){
+    	LastTime.innerHTML = '您上次访问本站时间是：'+last[1];
+    }else {
+    	LastTime.innerHTML = '欢迎，您是首次访问本站'
+    }
+    var date = new Date(),
+        YY = date.getFullYear(),
+        MM = format(date.getMonth()+1),
+        DD = format(date.getDate()),
+        hh = format(date.getHours()),
+        mm = format(date.getMinutes()),
+        ss = format(date.getSeconds()),
+        time = YY+'-'+MM+'-'+DD+' '+hh+':'+mm+':'+ss;
+    NewTime.innerHTML = '欢迎，您本次访问本站时间是：'+ time;
+    document.cookie ='lasttime='+time+';expires='+new Date(Date.now()+10*365*24*60*60*1000).toUTCString();
+    function format(n) {
+        return n<10?'0'+n:''+n
+    }
+</script>
+</body>
+</html>

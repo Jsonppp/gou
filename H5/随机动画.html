@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="keywords" content="YF"/>
+    <meta name="description" content="YF"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .box{
+            width: 985px;
+            margin: 50px auto;
+            box-shadow: 0 0 15px black
+        }
+        .box ul{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 100%;
+            padding-top: 25px;
+        }
+        .box ul li{
+            width: 288px;
+            height: 180px;
+            padding: 5px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 10px black;
+        }
+        .box ul li.rot{
+            animation: rot 0.5s linear;
+        }
+        .box ul li.sca{
+            animation: sca 0.5s linear;
+        }
+        .box ul li.move{
+            animation: move 0.5s linear;
+        }
+        @keyframes rot {
+            0%{ transform: rotateZ(0) }
+            20%{ transform: rotateZ(25deg) }
+            40%{ transform: rotateZ(-15deg) }
+            60%{ transform: rotateZ(15deg) }
+            80%{ transform: rotateZ(5deg) }
+            100%{ transform: rotateZ(0) }
+        }
+        @keyframes sca {
+            0%{ transform: scale(1) }
+            20%{ transform: scale(1.2) }
+            40%{ transform: scale(0.8) }
+            60%{ transform: scale(1.1) }
+            80%{ transform: scale(0.9) }
+            100%{ transform: scale(1) }
+        }
+        @keyframes move {
+            0%{ transform: translate(0) }
+            20%{ transform: translate(25px) }
+            40%{ transform: translate(-15px) }
+            60%{ transform: translate(15px) }
+            80%{ transform: translate(5px) }
+            100%{ transform: translate(0) }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li><img src="img/s1.jpg" alt=""></li>
+            <li><img src="img/s2.jpg" alt=""></li>
+            <li><img src="img/s3.jpg" alt=""></li>
+            <li><img src="img/s4.jpg" alt=""></li>
+            <li><img src="img/s5.jpg" alt=""></li>
+            <li><img src="img/s6.jpg" alt=""></li>
+            <li><img src="img/s7.jpg" alt=""></li>
+            <li><img src="img/s8.jpg" alt=""></li>
+            <li><img src="img/s9.jpg" alt=""></li>
+        </ul>
+        <script>
+            var aLi = document.getElementsByTagName('li'),
+                Ul = document.getElementsByTagName('ul')[0],
+                ClassArr = ['move','sca','rot'],
+                num;
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].onmouseenter = function () {
+                var This = this;
+                for(var j=0;j<aLi.length;j++){
+                    aLi[j].className = ''
+                }
+                setTimeout(function () {
+                    num = Math.floor(Math.random()*3);
+                    This.className = ClassArr[num];
+                    console.log(num)
+                },13);
+                }
+            }
+
+//            Ul.onclick = function (ev) {
+//                var ev = ev || event;
+//                var target = ev.target || ev.srcElement;
+//                console.log(target.nodeName.toLowerCase())
+//                if(target.nodeName.toLowerCase() === 'img'){
+//                    num = Math.floor(Math.random()*3);
+//                    target.parentNode.className = '';
+//                    setTimeout(function () {
+//                        target.parentNode.className = ClassArr[num];
+//                    },13)
+//                }
+//            };
+        </script>
+    </div>
+</body>
+</html>

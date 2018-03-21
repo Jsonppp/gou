@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        #box{
+            width:1000px;
+            margin:50px auto;
+        }
+        #top{
+            width:100%;
+            background: #f8f8f8;
+            border:1px solid #ddd;
+            height: 40px;
+        }
+        #top li{
+            position: relative;
+            float: left;
+            width:80px;
+            height: 40px;
+            text-align: center;
+            line-height:40px;
+            font-size:14px;
+            cursor: pointer;
+        }
+        #top li span.red{
+            color:red;
+        }
+        #top li div{
+            display: none;
+            position: absolute;
+            z-index: 99;
+            top:-1px;
+            left:0;
+            width: 100px;
+            height: 80px;
+            font-size:14px;
+            border:1px solid #ddd;
+            background: #ffffff;
+        }
+        #content{
+            width:100%;
+            margin-top:10px;
+        }
+        #content li{
+            position: relative;
+            float: left;
+            margin:5px 14px;
+            width:200px;
+            height: 230px;
+            padding:10px;
+            border:1px solid #eee;
+
+        }
+        #content li img{
+            width: 200px;
+            height: 200px;
+        }
+        #content li p{
+            font-size:14px;
+        }
+        #content li div{
+            position: absolute;
+            bottom:0;
+            right:0;
+            width: 50px;
+            height: 50px;
+            background: url("img/price.png");
+            text-align: center;
+            line-height: 50px;
+            color: #fff318;
+            font-size:14px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul id="top">
+        <li>流行</li>
+        <li>热销</li>
+        <li>上新</li>
+        <li class="price">
+            <span>价格</span>
+            <div class="hide">
+                <p class="sorting">从高到底</p>
+                <p class="sorting">从低到高</p>
+            </div>
+        </li>
+    </ul>
+    <ul id="content">
+        <li>
+            <img src="img/xh_img1.jpg" alt="">
+            <p>甜美七分袖荷叶边条纹设</p>
+            <div>
+                ￥<span>500</span>
+            </div>
+        </li>
+        <li>
+            <img src="img/xh_img2.jpg" alt="">
+            <p>甜美七分袖荷叶边条纹设</p>
+            <div>
+                ￥<span>100</span>
+            </div>
+        </li>
+        <li>
+            <img src="img/xh_img3.jpg" alt="">
+            <p>甜美七分袖荷叶边条纹设</p>
+            <div>
+                ￥<span>300</span>
+            </div>
+        </li>
+        <li>
+            <img src="img/xh_img4.jpg" alt="">
+            <p>甜美七分袖荷叶边条纹设</p>
+            <div>
+                ￥<span>700</span>
+            </div>
+        </li>
+        <li>
+            <img src="img/xh_img5.jpg" alt="">
+            <p>甜美七分袖荷叶边条纹设</p>
+            <div>
+                ￥<span>130</span>
+            </div>
+        </li>
+        <li>
+            <img src="img/xh_img6.jpg" alt="">
+            <p>甜美七分袖荷叶边条纹设</p>
+            <div>
+                ￥<span>215</span>
+            </div>
+        </li>
+        <li>
+            <img src="img/xh_img7.jpg" alt="">
+            <p>甜美七分袖荷叶边条纹设</p>
+            <div>
+                ￥<span>97</span>
+            </div>
+        </li>
+        <li>
+            <img src="img/xh_img8.jpg" alt="">
+            <p>甜美七分袖荷叶边条纹设</p>
+            <div>
+                ￥<span>99.5</span>
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+    var Pri = document.getElementsByClassName('price')[0], //价格
+        hide = document.getElementsByClassName('hide')[0],
+        span = document.querySelector('.price span'),
+        Sor = document.getElementsByClassName('sorting'),
+        Ul = document.getElementById('content'),
+        Li = document.querySelectorAll('#content li'),
+        Monye = Ul.querySelectorAll('li div span'),
+        arr = []; //创建个空数组用于下面子数组放置
+
+    Pri.addEventListener('mouseenter',function () { //移入价格显示选择排序规格模块
+        hide.style.display = 'block'
+    });
+    Pri.addEventListener('mouseleave',function () { //移出价格隐藏选择排序规格模块
+	    hide.style.display = 'none'
+    });
+    for(var i=0;i<Li.length;i++){   //把每个商品的价钱与其对应的li放在子数组的同一项，方便下面用价钱排序之后，能拿到对应价钱商品li
+    	arr[i] = [Monye[i].innerHTML,Li[i].innerHTML];
+    }
+    for( i=0;i<Sor.length;i++){
+    	Sor[i].i = i;
+    	Sor[i].addEventListener('click',function () { //2个点击事件，用来确定所选的排序规则
+		    hide.style.display = 'none';
+            span.innerHTML = this.innerHTML;
+            span.style.color = 'red'
+		    Sort(this.i) //调用下面的数组的排序函数，参数是用来判断所选择的排序规则，进入排序函数来判断该怎么排序
+	    })
+    }
+    function Sort(index) {
+    	arr.sort(function (a,b) { //把ul里面的li 按照价钱排序
+    		if(index){
+    			return a[0]-b[0];  //index=i 是1的话就是从低到高 升序
+           }else {
+    			return b[0]-a[0]; //0的话就是false 是从高到低  降序
+           }
+       })
+        Ul.innerHTML = ''; //先把ul 里面东西清空
+        for(var i=0;i<Li.length;i++){  //在通过遍历把上面排序好的数组里面的li从头到尾依次顺序的添加进ul里面，完成排序。
+    		Ul.innerHTML += '<li>'+arr[i][1]+'</li>'
+        }
+    }
+</script>
+</body>
+</html>

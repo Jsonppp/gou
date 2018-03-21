@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .box{
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 100px;
+            height: 100px;
+            background: orangered;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+    var box = document.getElementsByClassName('box')[0];
+
+    box.onmousedown = function (e) {
+    	e = e || window.event;
+        var startY = e.clientY,
+            startX = e.clientX,
+            startTop = this.offsetTop,
+            startLeft = this.offsetLeft;
+        document.onmousemove = function (e) {
+           e = e || window.event;
+           var afterY = e.clientY - startY,
+               afterX = e.clientX - startX;
+           box.style.top = afterY + startTop + 'px';
+           box.style.left = afterX + startLeft + 'px';
+        }
+        document.onmouseup = function () {
+            this.onmousemove = null
+            this.onmouseup = null
+        }
+    }
+</script>
+</body>
+</html>

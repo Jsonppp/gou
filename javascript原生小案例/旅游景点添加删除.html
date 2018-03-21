@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .wrap{
+            width: 1000px;
+            height: 400px;
+            margin: 50px auto;
+        }
+        .wrap .left{
+            float: left;
+            width: 500px;
+            height: 400px;
+            background: pink;
+        }
+        .wrap .left .l-top,
+        .wrap .left .l-bottom{
+            width: 500px;
+            height: 100px;
+            padding-top: 50px;
+        }
+        .wrap .left .l-top ul{
+            width: 475px;
+            height: 100px;
+            padding-left: 25px;
+        }
+        .wrap .left .l-top ul li{
+            float: left;
+            padding: 3px 5px;
+            color: red;
+            border: 1px solid #aaa;
+            margin-left: 10px;
+            background: #fff;
+            cursor: pointer;
+        }
+        .wrap .left .l-bottom ul{
+            width: 475px;
+            height: 100px;
+            padding-left: 25px;
+        }
+        .wrap .left .l-bottom ul li{
+            float: left;
+            padding: 3px 5px;
+            color: orangered;
+            border: 1px solid #666;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .wrap .left .l-top ul li:nth-child(1){
+            border: none;
+            background: none;
+            color: orangered;
+            cursor: text;
+        }
+        .wrap .right{
+            float: right;
+            width: 500px;
+            height: 400px;
+            background: skyblue;
+        }
+        .wrap .right ul{
+            width: 475px;
+            height: 200px;
+            padding: 100px 0 0 25px;
+        }
+        .wrap .right ul li{
+            float: left;
+            padding: 3px 5px;
+            color: orangered;
+            border: 1px solid #666;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="left">
+        <div class="l-top">
+            <ul>
+                <li>旅游景点:</li>
+                <li class="atta">越南</li>
+                <li class="atta">老挝</li>
+                <li class="atta">新加坡</li>
+                <li class="atta">纽约</li>
+                <li class="atta">澳大利亚</li>
+            </ul>
+        </div>
+        <div class="l-bottom">
+            <ul class="addLeft">
+                <!--<li class="atta">纽约</li>-->
+                <!--<li class="atta">澳大利亚</li>-->
+            </ul>
+        </div>
+    </div>
+    <div class="right">
+        <ul class="addRight">
+            <!--<li class="atta">纽约</li>-->
+            <!--<li class="atta">澳大利亚</li>-->
+        </ul>
+    </div>
+</div>
+<script>
+    var atta = document.getElementsByClassName('atta'),
+        Left = document.getElementsByClassName('addLeft')[0],
+        Right = document.getElementsByClassName('addRight')[0];
+
+        for(var i=0;i<atta.length;i++){
+            atta[i].confirm = true; //给每个事件对象添加个自定义属性，来确定页面是否有重复内容
+	        atta[i].addEventListener('click',function () {
+	        	if(this.confirm){//判断对象是否存在，true是不存，在走真。执行下面内容
+                    //给左边和右边的内容创建li标签
+	        		var Li1 = document.createElement('li'),
+                        Li2 = document.createElement('li'),
+                        span = document.createElement('span'),
+                        This = this; //把当前对象存起来，方便下面span点击事件能拿到修改其自定义属性
+                    //给创建的元素添加内容和事件
+	        		Li1.innerHTML = this.innerHTML + ' | ';
+	        		Li2.innerHTML = this.innerHTML;
+	        		span.innerHTML = 'X';
+	        		//点击删除左右对应的内容，并把上面的对象的自定义属性修改为true，下次可以添加
+	        		span.onclick = function () {
+                        Left.removeChild(Li1);
+                        Right.removeChild(Li2);
+                        This.confirm = true //
+			        };
+	        		//把创建好的元素添加到对应的父级下面
+			        Li1.appendChild(span);
+	        		Left.appendChild(Li1);
+	        		Right.appendChild(Li2);
+	        		//添加完成修改自定义属性，下次判断不进true,防止重复添加
+	        		this.confirm = false
+                }
+	        })
+        }
+</script>
+</body>
+</html>

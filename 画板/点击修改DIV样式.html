@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        body.mask{
+            background: rgba(0,0,0,.3);
+        }
+        #mask{
+            display: none;
+            overflow: hidden;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -100px 0 0 -200px;
+            width: 300px;
+            padding: 30px 60px;
+            background: #fff;
+        }
+        #mask.show{
+            display: block;
+        }
+        ul{
+            width: 100%;
+            background: #fff;
+        }
+        li{
+            width: 100%;
+            height: 50px;
+        }
+        li p {
+            width: 60px;
+            height: 30px;
+            font-size: 14px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px  solid #ddd;
+            float: left;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        li p:nth-child(1){
+            border: none;
+            font-weight: bold;
+        }
+        .conplete{
+            display: block;
+            padding: 2px 10px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="mask">
+        <ul>
+            <li class="on">
+                <p>颜色 :</p>
+                <p style="background:red;" class="color"></p>
+                <p style="background:green;" class="color"></p>
+                <p style="background:blue;" class="color"></p>
+            </li>
+            <li class="two">
+                <p>宽度 :</p>
+                <p><span class="width">100</span>px</p>
+                <p><span class="width">200</span>px</p>
+                <p><span class="width">300</span>px</p>
+            </li>
+            <li class="three">
+                <p>高度 :</p>
+                <p><span class="height">100</span>px</p>
+                <p><span class="height">200</span>px</p>
+                <p><span class="height">300</span>px</p>
+            </li>
+        </ul>
+        <button class="conplete">完成</button>
+    </div>
+    <div id="box"></div>
+    <button class="but">点我！</button>
+    <script>
+        var Box = document.getElementById('box'),
+            But = document.getElementsByClassName('but')[0],
+            Mask = document.getElementById('mask');
+            But.addEventListener('click',but);
+            Mask.addEventListener('click',function (e) {
+               var e = e || event;
+               var target = e.target || e.srcElement;
+               if(target.className === 'color'){
+               	    Box.style.background = target.style.background
+               }else if(target.className === 'width'){
+               	    Box.style.width = target.innerHTML + 'px'
+               }else if(target.className === 'height'){
+	                Box.style.height = target.innerHTML + 'px'
+               }else if(target.className === 'conplete'){
+               	    document.body.className = '';
+               	    this.className = '';
+               }
+            })
+            function but() {
+                document.body.className = 'mask'
+                Mask.className = 'show'
+            }
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .box{
+            width: 370px;
+            padding: 10px 0 30px;
+            margin: 10px auto 0;
+            border: 2px solid #aaa;
+            border-radius: 5px;
+        }
+        .topBox{
+            width: 340px;
+            height: 60px;
+            margin:  0 auto;
+        }
+        .topBox .Tcontent{
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            font-size: 14px;
+            text-align: right;
+            line-height: 60px;
+            border: 1px solid #aaa;
+        }
+        .bottomBox{
+            width: 330px;
+            margin: 0 auto;
+            padding-top: 5px;
+        }
+        .bottomBox li{
+            width: 100%;
+            margin: 10px 0;
+        }
+        .bottomBox li span{
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+
+            text-align: center;
+            line-height: 60px;
+            color: #000;
+            margin-right: 22px;
+            cursor: pointer;
+        }
+        .bottomBox li span:nth-child(4){
+            margin-right: 0;
+        }
+        .bottomBox li span input{
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="topBox">
+            <div class="Tcontent"></div>
+        </div>
+        <div class="bottomBox">
+            <div class="Bcontent">
+                <Ul id="on">
+                    <li>
+                        <span><input type="button" class="on" value="1"></span>
+                        <span><input type="button" class="on" value="2"></span>
+                        <span><input type="button" class="on" value="3"></span>
+                        <span><input type="button" class="on" value="+"></span>
+                    </li>
+                    <li>
+                        <span><input type="button" class="on" value="4"></span>
+                        <span><input type="button" class="on" value="5"></span>
+                        <span><input type="button" class="on" value="6"></span>
+                        <span><input type="button" class="on" value="-"></span>
+                    </li>
+                    <li>
+                        <span><input type="button" class="on" value="7"></span>
+                        <span><input type="button" class="on" value="8"></span>
+                        <span><input type="button" class="on" value="9"></span>
+                        <span><input type="button" class="on" value="*"></span>
+                    </li>
+                    <li>
+                        <span><input type="button" class="on" value="0"></span>
+                        <span><input type="button" class="on" value="."></span>
+                        <span><input type="button" class="on" value="="></span>
+                        <span><input type="button" class="on" value="/"></span>
+                    </li>
+                </Ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        var On = document.getElementById('on'),
+            Tcontent = document.getElementsByClassName('Tcontent')[0];
+        On.addEventListener('click',function (e) {
+            var e = e || event;
+            var target = e.target || e.srcElement;
+            if( target.value ){
+            	if(target.value === '+'){
+		            Tcontent.innerHTML += '+'
+                }else if(target.value === '-'){
+		            Tcontent.innerHTML += '-'
+	            }else if(target.value === '*'){
+		            Tcontent.innerHTML += '*'
+	            }else if(target.value === '/'){
+		            Tcontent.innerHTML += '/'
+	            }else if(target.value === '='){
+		            Tcontent.innerHTML = eval(Tcontent.innerHTML)
+	            }else {
+                    Tcontent.innerHTML += target.value
+                }
+            }
+        })
+    </script>
+</body>
+</html>

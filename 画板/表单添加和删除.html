@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        table{
+            border-collapse: collapse;
+            margin:50px auto 0;
+        }
+        thead tr{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        tr{
+            text-align: center;
+        }
+        tr.active{
+            background: pink;
+        }
+        .del{
+            cursor: pointer;
+        }
+        div{
+            width: 100%;
+            height: 30px;
+        }
+        div ul{
+            width: 50%;
+            float: right;
+            height: 100%;
+        }
+        div ul li{
+            float: left;
+            padding:3px 5px;
+            font-size:14px;
+            font-weight: bold;
+            margin-right:5px;
+            color:#fff;
+            background: #f60;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>Select</td>
+                <td>Name</td>
+                <td>Sex</td>
+                <td>Mark</td>
+                <td>Delete</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>狗蛋</td>
+                <td>男</td>
+                <td>59</td>
+                <td class="del">删除</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>狗蛋</td>
+                <td>男</td>
+                <td>59</td>
+                <td class="del">删除</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>狗蛋</td>
+                <td>男</td>
+                <td>59</td>
+                <td class="del">删除</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <ul>
+            <li>新增</li>
+            <li>删除</li>
+            <li>全选</li>
+            <li>全不选</li>
+            <li>反选</li>
+        </ul>
+    </div>
+    <script>
+        var Tr = document.getElementsByTagName('tr'),
+	        inp = document.getElementsByTagName('input'),
+            Del = document.getElementsByClassName('del'),
+            Tbody = document.getElementsByTagName('tbody')[0],
+            Oli = document.getElementsByTagName('li'),
+            Inp = Tr[1].children[0].cloneNode(true),
+            Delete = Tr[1].children[4].cloneNode(true);
+        //事件代理，解决新增节点无法获得事件
+        Tbody.onclick = function (e) {
+            e = e || window.event;
+            var target = e.target || e.srcElement;
+            if(target.className==='del'){
+	            if(confirm('确定要删除吗')){
+		            Tbody.removeChild(target.parentNode)
+	            }
+            }else if(target.nodeName.toLowerCase()==='input'){
+	            if(target.checked){
+		            target.parentNode.parentNode.style.backgroundColor = 'green'
+	            }else {
+		            target.parentNode.parentNode.style.backgroundColor = '#fff'
+	            }
+            }
+        }
+        //新增
+        Oli[0].onclick = function () {
+        	var tr = document.createElement('tr'),
+                Name = document.createElement('td'),
+                Sex = document.createElement('td'),
+                Mark = document.createElement('td');
+	        Name.innerText = prompt('Name');
+	        Sex.innerText = prompt('Sex');
+	        Mark.innerText = prompt('Mark');
+            if(!(Name.innerText&&Sex.innerText&&Mark.innerText)){
+            	alert('智障')
+            }else {
+	            Tbody.appendChild(tr);
+	            tr.appendChild(Inp);
+	            tr.appendChild(Name);
+	            tr.appendChild(Sex);
+	            tr.appendChild(Mark);
+	            tr.appendChild(Delete);
+            }
+        }
+        //删除
+        Oli[1].onclick = function () {
+            if(confirm('是否删除')){
+            	for(var i=inp.length-1;i>=0;i--){
+            		if(inp[i].checked){
+            			console.log(this.parentNode.parentNode)
+            			Tbody.removeChild(Tbody.children[i])
+                    }
+                }
+            }
+        }
+        //全选
+        Oli[2].onclick = function () {
+            for(var i=0;i<inp.length;i++){
+            	Tbody.children[i].children[0].children[0].checked = true;
+            	Tbody.children[i].style.backgroundColor = 'green'
+            }
+        }
+        //全不选
+        Oli[3].onclick = function () {
+	        for(var i=0;i<inp.length;i++){
+		        Tbody.children[i].children[0].children[0].checked = false;
+		        Tbody.children[i].style.backgroundColor = '#fff'
+	        }
+        }
+        //反选
+        Oli[4].onclick = function () {
+            for(var i=0;i<inp.length;i++){
+            	if(inp[i].checked){
+            		inp[i].checked = false;
+		            inp[i].parentNode.parentNode.style.background = '#fff'
+                }else {
+		            inp[i].checked = true;
+		            inp[i].parentNode.parentNode.style.background = 'green'
+                }
+
+            }
+        }
+            
+    </script>
+</body>
+</html>

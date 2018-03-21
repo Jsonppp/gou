@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .box{
+            width: 700px;
+            height: 450px;
+            margin: 50px auto 0;
+        }
+        #table{
+            width: 100%;
+            height: 400px;
+            border:1px solid orangered;
+        }
+        #table th{
+            height: 70px;
+            background: pink;
+        }
+        #table td{
+            width: 25%;
+            height: 70px;
+            text-align: center;
+            background: -webkit-linear-gradient(top,rgba(0,0,0,.1),#fff,
+            rgba(0,0,0,.1));
+        }
+        #table td img{
+            width: 80px;
+            vertical-align: middle;
+        }
+        input{
+            width: 60px;
+            height: 30px;
+            text-align: center;
+        }
+        button{
+            width: 30px;
+            height: 30px;
+        }
+        .bottom{
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background: -webkit-linear-gradient(top,pink 20%,lightpink 40%,hotpink);
+        }
+        .bottom input{
+            width: 60px;
+            height: 40px;
+            font-size: 14px;
+            color: deepskyblue;
+            margin: 5px 0 0 50px;
+        }
+        .bottom  div{
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 130px;
+            width: 280px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+        }
+        .bottom  div:nth-child(3){
+            left: 410px;
+        }
+        .bottom  div span{
+            display: inline-block;
+            height: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <table border="1" cellspacing="0" id="table">
+            <thead>
+                <tr>
+                    <th>商品</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>小计</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="img/car1.jpg"></td>
+                    <td><span class="money">40</span> ¥</td>
+                    <td>
+                        <button class="remove">-</button>
+                        <input type="text" value="0">
+                        <button class="add">+</button>
+                    </td>
+                    <td class="xiaoji">0</td>
+                </tr>
+                <tr>
+                    <td><img src="img/car2.jpg"></td>
+                    <td><span class="money">20</span> ¥</td>
+                    <td>
+                        <button class="remove">-</button>
+                        <input type="text" value="0">
+                        <button class="add">+</button>
+                    </td>
+                    <td class="xiaoji">0</td>
+                </tr>
+                <tr>
+                    <td><img src="img/car3.jpg"></td>
+                    <td><span class="money">30</span> ¥</td>
+                    <td>
+                        <button class="remove">-</button>
+                        <input type="text" value="0">
+                        <button class="add">+</button>
+                    </td>
+                    <td class="xiaoji">0</td>
+                </tr>
+                <tr>
+                    <td><img src="img/car4.jpg"></td>
+                    <td><span class="money">50</span> ¥</td>
+                    <td>
+                        <button class="remove">-</button>
+                        <input type="text" value="0">
+                        <button class="add">+</button>
+                    </td>
+                    <td class="xiaoji">0</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="bottom">
+            <input type="reset" value="清空" id="reset">
+            <div>
+                已选中商品：<span id="num">0</span>个
+            </div>
+            <div>
+                合计费用：<span id="total">0</span>元
+            </div>
+        </div>
+    </div>
+    <script>
+        var Money = document.getElementsByClassName('money'),     //每件商品单价
+            Remove = document.getElementsByClassName('remove'),     //删除
+            Add = document.getElementsByClassName('add'),   //添加
+            Xiao = document.getElementsByClassName('xiaoji'),   //没单件商品小计
+            Inp = document.querySelectorAll('.box table input'),    //每单件商品数量
+            Res = document.getElementById('reset'),     //一键清空购物车
+            Num = document.getElementById('num'),   //总件数
+            Total = document.getElementById('total');   //总计费用
+
+        !function () {
+          for(var i=0;i<Money.length;i++) {
+          	Add[i].i = i;
+          	Remove[i].i = i;
+              Add[i].onclick = function () {
+          		var text = this.i;
+                  Inp[text].valie = Inp[text].value++;
+	              var Xiaoji = Inp[text].value*Money[text].innerHTML;
+	              Xiao[text].innerHTML = Xiaoji;
+	              To()
+              };
+              Remove[i].onclick = function () {
+              	var text = this.i;
+                    Inp[text].value--;
+              	if(Inp[text].value>=0){
+		          var Xiaoji = Inp[text].value*Money[text].innerHTML;
+		          Xiao[text].innerHTML = Xiaoji;
+		          To()
+	          }else {
+	              Inp[text].value= 0;
+		          alert('您还未添加该商品')
+	          }
+            };
+          }
+          function To() {
+              var TotalMoney = 0,
+	              TotalNum = 0;
+          	for(var i=0;i<Money.length;i++){
+		          TotalMoney += parseInt(Xiao[i].innerHTML);
+		          TotalNum += parseInt(Inp[i].value);
+              }
+              Total.innerHTML = TotalMoney;
+              Num.innerHTML = TotalNum;
+          }
+        }()
+    </script>
+</body>
+</html>

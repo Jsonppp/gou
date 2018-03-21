@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .box{
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        .min{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 7px;
+            height: 7px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="min"></div>
+</div>
+<script>
+    var box = document.getElementsByClassName('box')[0],
+        minBox = document.getElementsByClassName('min')[0];
+
+    player();
+    Min();
+    function Min() {
+	    minBox.onmousedown = function (e) {
+		    e = e || window.event;
+		    e.cancelBubble = true; //阻止默认冒泡行为
+		    var startY = e.clientY, //获取鼠标按下时候的XY的坐标
+			    startX = e.clientX,
+			    startWidth = parseFloat(getComputedStyle(box).width), //获取需要拉伸盒子初始宽高
+			    startHeight = parseFloat(getComputedStyle(box).height);
+		    document.onmousemove = function (e) {
+			    e = e || window.event;
+			    var Width = e.clientX - startX, //运动后的XY值减去按下时候的XY值，就是所移动的值
+				    Height = e.clientY - startY;
+			    box.style.width = startWidth + Width + 'px'; //所移动的值加上初始宽高，就是拉伸后的宽高
+			    box.style.height = startHeight + Height + 'px';
+		    }
+		    document.onmouseup = function () { //鼠标抬起时解除移动跟抬起事件
+			    this.onmousemove = null;
+			    this.onmouseup = null;
+		    }
+	    };
+     };
+    function player() {
+	    box.onmousedown = function (e) {
+		    e = e || window.event;
+		    var startY = e.clientY, //获取鼠标按下时候的XY的坐标
+			    startX = e.clientX,
+			    startTop = this.offsetTop, //获取所要拖动盒子初始的定位宽高
+			    startLeft = this.offsetLeft;
+		    document.onmousemove = function (e) {
+			    e = e || window.event;
+			    var afterY = e.clientY - startY, //运动后的XY值减去按下时候的XY值，就是所移动的值
+				    afterX = e.clientX - startX;
+			    box.style.top = afterY + startTop + 'px'; //所移动的值加上盒子的初始定位值，就是最终的移动后所在的位置
+			    box.style.left = afterX + startLeft + 'px';
+		    }
+		    document.onmouseup = function () { //鼠标抬起时解除移动跟抬起事件
+			    this.onmousemove = null;
+			    this.onmouseup = null;
+		    }
+	    }
+    }
+
+</script>
+</body>
+</html>

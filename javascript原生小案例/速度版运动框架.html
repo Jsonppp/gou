@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        DIVCSS5-HTML模板
+        UTF-8
+        -
+        www.divcss5.com </title>
+    <meta name="keywords"
+          content="关键词"/>
+    <meta name="description"
+          content="关键词描述"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Microsoft YaHei;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .box{
+            width: 200px;
+            height: 100px;
+            background-color: orangered;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+    window.requestAnimationFrame = window.requestAnimationFrame || function (fn){return setTimeout(fn,1000/60)};
+    window.cancelAnimationFrame = window.cancelAnimationFrame || clearTimeout;
+    var Box = document.getElementsByClassName('box')[0];
+    move(Box,'width',300,3);
+    function move(obj,attr,target,speed) {
+	    var start = parseFloat(getStyle(obj)[attr]);
+	    var isStart = start> target;
+	    if(isStart)speed = -speed;
+	    fn();
+	    function fn() {
+		    start += speed;
+		    (isStart?start<=target:start>=target)?start = target:requestAnimationFrame(fn);
+		    obj.style[attr] = start + 'px'
+	    }
+    }
+//    function move(obj,attr,target,speed) {
+//        var start = parseFloat(getStyle(obj)[attr]);
+//        var isStart = start> target;
+//        if(isStart){
+//        	speed = -speed
+//        }
+//        fn();
+//        function fn() {
+//            start += speed;
+//            if(isStart?start<=target:start>=target){
+//            	start = target
+//            }else {
+//	            requestAnimationFrame(fn)
+//            }
+//	        obj.style[attr] = start + 'px'
+//        }
+//    }
+    function getStyle(obj) {
+        return getComputedStyle(obj) || obj.currentStyle
+    }
+</script>
+</body>
+</html>
